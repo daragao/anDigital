@@ -1,5 +1,6 @@
 const _global_consts = {
     REFRESH: 'REFRESH',
+    SEARCH: 'SEARCH',
     REMOVE_TEST: 'REMOVE_TEST',
     ADD_TEST: 'ADD_TEST'
 };
