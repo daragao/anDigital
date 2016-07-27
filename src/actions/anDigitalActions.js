@@ -8,6 +8,13 @@ class AnDigitalActions {
         });
     }
 
+    static refreshVenues(venues) {
+        return Dispatcher.dispatch({
+            type: Constants.REFRESH_VENUES,
+            data: venues
+        });
+    }
+
     static search(value) {
         return Dispatcher.dispatch({
             type: Constants.SEARCH,

@@ -5,6 +5,8 @@ import {BaseComponent ,BaseComponentController} from '../common/Base';
 import AnDigitalActions from '../../actions/anDigitalActions';
 import VenueStore from '../../stores/anDigitalStore';
 
+import VenuesTable from './VenuesTable';
+
 class SearchBox extends BaseComponent {
 
     constructor(props) {
@@ -43,7 +45,8 @@ class SearchVenue extends BaseComponentController {
     }
 
     render() {
-        return <div><SearchBox/> </div>;
+        let venues = this.getStoreState().venues;
+        return <div><SearchBox/><VenuesTable venues={venues} /> </div>;
     }
 }
 

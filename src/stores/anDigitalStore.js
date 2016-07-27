@@ -1,21 +1,22 @@
 import BaseStore from './baseStore';
 import Constants from '../constants';
+import Dispatcher from '../dispatcher';
 
 class VenueStore extends BaseStore {
-    constructor() {
-        super();
+    getInitialState() {
+        this.state = {};
+
         //check if geolocation exists
         if ("geolocation" in navigator) {
-            navigator.geolocation.watchPosition((geo) => {
-                this.state.geo = geo;
-                console.log('geo:',this.state);
-            });
+            navigator.geolocation.watchPosition((geo) => this.state.geo = geo);
         } else  {
             // just write in the console since it will have london as default
             // location
             console.log('No GeoLocation in this browser! :)');
         }
+        return this.state;
     }
+
 
     __onDispatch (action) {
         switch (action.type) {
@@ -24,9 +25,14 @@ class VenueStore extends BaseStore {
             this.__emitChange();
             return this.state;
 
+        case Constants.REFRESH_VENUES:
+            this.refreshVenues(action.data);
+            this.__emitChange();
+            return this.state;
+
         case Constants.SEARCH:
             this.search(action.data);
-            this.__emitChange();
+            //this.__emitChange(); //doesn't need to emit change
             return this.state;
 
         case Constants.ADD_TEST:
@@ -64,8 +70,18 @@ class VenueStore extends BaseStore {
         let params = $.param(paramsObj);
         let url = urlBase + params;
         let searchPromise = $.get(url);
-        $.when(searchPromise).then((response) => console.log(response));
-        console.log('SEARCH:',url);
+        $.when(searchPromise)
+        .then((response) => { //refresh the venue list
+            Dispatcher.dispatch({
+                type: Constants.REFRESH_VENUES,
+                data: response[0].response.venues
+            });
+        });
+        //console.log('SEARCH:',url);
+    }
+
+    refreshVenues(venues) {
+        this.state.venues = venues;
     }
 
     addTest(key,value) {
