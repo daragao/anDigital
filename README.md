@@ -72,3 +72,7 @@ gulp serve //it will serve the frontend at http://localhost:8080
 
  
 ![GitHub Logo](example.gif)
+
+### What I used during development
+
+ I am working on OSX 10.11.5 and was using Chrome Version 51.0.2704.103 (64-bit)
