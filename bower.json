@@ -1,0 +1,21 @@
+{
+  "name": "react_flux_foundation_boilerplate",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Duarte Aragao <daragao@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation-sites": "~6.1.2"
+  }
+}
