@@ -67,3 +67,8 @@ gulp serve //it will serve the frontend at http://localhost:8080
  About 1. I got too excited to show you things I've done in the past, and ended up using a canon to kill a fly, I hope I have taken care of the fly just the same, but clearly this could all be much shorter.
 
  About 2. I wanted to do testing, and show you just how obsessive I have become with this on my day to day, but the truth is my experience with Javascript testing has only came recently with Angular and Jasmine, and I still didn't feel comfortable to deal with this on an exercise that I am due to deliver.
+ 
+### Example GIF :)
+
+ 
+![GitHub Logo](example.gif)
