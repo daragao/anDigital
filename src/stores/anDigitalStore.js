@@ -72,6 +72,7 @@ class VenueStore extends BaseStore {
         let searchPromise = $.get(url);
         $.when(searchPromise)
         .then((response) => { //refresh the venue list
+            this.state.refreshing = true;
             Dispatcher.dispatch({
                 type: Constants.REFRESH_VENUES,
                 data: response[0].response.venues
@@ -81,6 +82,7 @@ class VenueStore extends BaseStore {
     }
 
     refreshVenues(venues) {
+        this.state.refreshing = false;
         this.state.venues = venues;
     }
 

@@ -45,8 +45,12 @@ class SearchVenue extends BaseComponentController {
     }
 
     render() {
-        let venues = this.getStoreState().venues;
-        return <div><SearchBox/><VenuesTable venues={venues} /> </div>;
+        let storeState = this.getStoreState();
+        let venues = <div>REFRESHING</div>
+        if(!storeState.refreshing && storeState.venues) {
+            venues = <VenuesTable venues={storeState.venues} />
+        }
+        return <div><SearchBox/>{venues}</div>;
     }
 }
 
