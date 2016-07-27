@@ -5,6 +5,7 @@ var browserify = require('browserify');
 var watchify = require('watchify');
 var source = require('vinyl-source-stream');
 var es = require('event-stream');
+var connect = require('gulp-connect');
 
 var WATCH_JS = true;
 
@@ -39,6 +40,10 @@ function buildJS(watch,filepath) {
     var result = update();
     return result;
 }
+
+gulp.task('serve', function() {
+  connect.server();
+});
 
 gulp.task('default', function() {
   // place code for your default task here
