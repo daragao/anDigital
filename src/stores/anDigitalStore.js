@@ -32,7 +32,6 @@ class VenueStore extends BaseStore {
 
         case Constants.SEARCH:
             this.search(action.data);
-            //this.__emitChange(); //doesn't need to emit change
             return this.state;
 
         case Constants.ADD_TEST:

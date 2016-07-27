@@ -37,3 +37,12 @@
 @include foundation-title-bar;
 @include foundation-tooltip;
 @include foundation-top-bar;
+
+.search-box {
+    &, &:focus {
+        font-size: xx-large;
+        border: none;
+        box-shadow: none;
+        margin-top: 50px;
+    }
+}

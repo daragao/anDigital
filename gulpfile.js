@@ -7,7 +7,7 @@ var source = require('vinyl-source-stream');
 var es = require('event-stream');
 var connect = require('gulp-connect');
 
-var WATCH_JS = true;
+var WATCH_JS = false;
 
 function buildJS(watch,filepath) {
     var notifyMsg = ' -> (' +  String(filepath) + ') browserify ended';
@@ -17,7 +17,8 @@ function buildJS(watch,filepath) {
         extensions: ['.jsx'],
         cache: {},
         packageCache: {},
-        debug:true
+        //debug:true
+        debug:false
     };
     var bundler = browserify(bundlerProps);
     if(watch) {
@@ -31,7 +32,6 @@ function buildJS(watch,filepath) {
         var pipeResult = transformer.bundle()
         .on('error', function(err) { console.log(err.toString()); })
         .pipe(source(basename+'.js'))
-        //.pipe(buffer()).pipe(uglify())
         .pipe(gulp.dest('bin/js')).pipe($.notify({ message: notifyMsg }));
         return pipeResult;
     };
@@ -69,14 +69,13 @@ gulp.task('sass', function() {
     ];
 
     return gulp.src('scss/main.scss')
-    .pipe($.sourcemaps.init())
+    //.pipe($.sourcemaps.init())
     .pipe($.sass({
         includePaths: sassPaths,
-        outputStyle: 'expanded',
+        outputStyle: 'compressed',//'expanded',
         errLogToConsole: true }) .on('error', $.sass.logError))
-    //.pipe($.autoprefixer({ browsers: ['last 2 versions', 'ie >= 9'] }))
     .pipe($.rename('app.css'))
-    .pipe($.sourcemaps.write())
+    //.pipe($.sourcemaps.write())
     .pipe(gulp.dest('bin/css'))
     .pipe($.notify({ message: ' -> sass ended' }));
 });
@@ -90,5 +89,5 @@ gulp.task('clean', function () {
 gulp.task('build',['js-babel-multiple','sass']);
 gulp.task('watch',['build'],function() {
     //js-babel-multiple already watches js files! with watchify
-    gulp.watch(['bin/scss/**'], ['sass']);
+    gulp.watch(['scss/**'], ['sass']);
 });

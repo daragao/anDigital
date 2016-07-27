@@ -7,14 +7,19 @@ class VenuesTable extends BaseComponent {
 
     constructor(props) {
         super(props);
+        this.state = { venues: this.venues2State(props.venues) };
     }
 
-    componentWillReceiveProps(nextProps) {
-        let venues = (nextProps.venues || []).map((v) => ({
+    venues2State(venues) {
+        let venuesState = (venues || []).map((v) => ({
             id: v.id,
             name: v.name
         }));
-        this.setState({ venues: venues });
+        return venuesState;
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({ venues: this.venues2State(nextProps.venues) });
     }
 
     renderTableRow(venue) {
@@ -34,7 +39,6 @@ class VenuesTable extends BaseComponent {
     }
 
     render() {
-        if(!this.state) return <div></div>;
         let table = this.renderTable(this.state.venues);
         let colElem = this.renderCol(table);
         let rowElem = this.renderRow(colElem);

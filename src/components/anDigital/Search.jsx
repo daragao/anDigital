@@ -27,7 +27,8 @@ class SearchBox extends BaseComponent {
 
     renderSearchBox() {
         let searchBoxElem = <input type="text" onChange={this.change.bind(this)}
-            placeholder="Search Venue"></input>
+            placeholder="Type the venue you wish to search around you"
+            className="search-box" autoFocus={true}></input>
         return searchBoxElem;
     }
 
@@ -46,8 +47,8 @@ class SearchVenue extends BaseComponentController {
 
     render() {
         let storeState = this.getStoreState();
-        let venues = <div>REFRESHING</div>
-        if(!storeState.refreshing && storeState.venues) {
+        let venues;
+        if(storeState.venues) {
             venues = <VenuesTable venues={storeState.venues} />
         }
         return <div><SearchBox/>{venues}</div>;
